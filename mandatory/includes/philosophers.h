@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:04:46 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/18 18:40:21 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/18 21:00:52 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		ft_error(t_philo *g, char *str);
 void	ft_exit_error(t_philo *g, char *str, int usage);
 
 /* ---------------- UTILS ---------------- */
+void	*ft_routine(t_philos *philo);
 void	ft_free_struct(t_philo *g);
 int		ft_is_valid_timestamps(t_philo *g, char **argv);
 int		ft_check_and_init(t_philo *g, int argc, char **argv);

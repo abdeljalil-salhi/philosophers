@@ -6,14 +6,14 @@
 #    By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 03:02:44 by absalhi           #+#    #+#              #
-#    Updated: 2023/01/18 18:00:46 by absalhi          ###   ########.fr        #
+#    Updated: 2023/01/18 20:59:57 by absalhi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 BNAME	=	philo_bonus
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread -O3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -pthread -O3
 CC		=	cc
 RM		=	rm -rf
 
@@ -23,7 +23,7 @@ GRAY	=	'\033[2;37m'
 ITALIC	=	'\033[3m'
 
 _SRCS	=	main.c ft_errors.c ft_init.c ft_philo_utils.c ft_utils.c \
-			ft_functions.c
+			ft_functions.c ft_philo.c
 SRCS	=	$(addprefix mandatory/srcs/, $(_SRCS))
 OBJS	=	$(SRCS:.c=.o)
 

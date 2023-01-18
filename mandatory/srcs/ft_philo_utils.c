@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:21:42 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/18 18:41:04 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/18 18:52:42 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_is_valid_timestamps(t_philo *g, char **argv)
 
 int	ft_check_and_init(t_philo *g, int argc, char **argv)
 {
-	ft_memset(g, 0, sizeof(g));
+	ft_memset(g, 0, sizeof(t_philo));
 	g->limited_meals = (argc == 6);
 	if (ft_is_valid_timestamps(g, argv))
 		return (1);
