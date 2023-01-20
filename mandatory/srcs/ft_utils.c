@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:19 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/18 16:45:36 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/20 15:29:07 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,13 @@ int	ft_isint(char *str)
 		n = n * 10 + str[i++] - 48;
 	}
 	return ((n * s) <= INT_MAX && (n * s) >= INT_MIN);
+}
+
+unsigned long	ft_get_time(void *options)
+{
+	t_timeval	timestamp;
+
+	gettimeofday(&timestamp, options);
+	return ((timestamp.tv_sec * 1000)
+		+ (timestamp.tv_usec / 1000));
 }

@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 04:37:33 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/18 21:03:39 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/20 15:48:01 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,18 @@ void	ft_print_struct(t_philo *g)
 
 void	ft_free_struct(t_philo *g)
 {
+	size_t	i;
+
 	if (g->allocated.philos)
 		free(g->philos);
+	if (g->allocated.mutex_print)
+		free(g->print);
+	i = -1;
+	if (g->allocated.mutex_eating)
+		while (++i < g->n_philos)
+			free(g->philos[i].eating);
+	if (g->allocated.mutex_forks)
+		free(g->forks);
 }
 
 int	main(int argc, char **argv)
@@ -41,13 +51,13 @@ int	main(int argc, char **argv)
 	size_t	i;
 
 	if (argc != 5 && argc != 6)
-		ft_exit_error(&g, "Invalid number of arguments.", 1);
+		return (ft_exit_error(&g, "Invalid number of arguments.", 1));
 	if (ft_check_and_init(&g, argc, argv))
 		ft_exit_error(&g, g.exit_message, 0);
 	i = -1;
 	while (++i < g.n_philos)
 		if (pthread_join(g.philos[i].thread, 0))
-			ft_exit_error(&g, "Error while joining the threads.", 0);
+			return (ft_exit_error(&g, "Error while joining the threads.", 0));
 	ft_print_struct(&g);
 	return (0);
 }

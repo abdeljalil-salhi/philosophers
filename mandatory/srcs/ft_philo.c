@@ -6,14 +6,15 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:57:03 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/18 21:01:27 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/20 13:38:30 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	*ft_routine(t_philos *philo)
+void	*ft_routine(void *philo)
 {
-	printf("philosopher %d has taken the fork\n", philo->id);
+	t_philos *philso = (t_philos *) philo;
+	printf("philosopher %d has taken the fork\n", philso->id);
 	return (0);
 }

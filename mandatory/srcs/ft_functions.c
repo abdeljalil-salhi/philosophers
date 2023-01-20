@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:34:57 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/18 18:41:16 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/20 13:37:21 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t			i;
-	unsigned char	*s;
-
-	s = b;
-	i = 0;
-	while (i < len)
-		s[i++] = c;
-	return (s);
-}
-
 void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*tab;
@@ -45,7 +33,7 @@ void	*ft_calloc(size_t count, size_t size)
 	tab = (unsigned char *) malloc(count * size);
 	if (!tab)
 		return (NULL);
-	ft_memset(tab, '\0', size * count);
+	memset(tab, '\0', size * count);
 	return ((void *) tab);
 }
 

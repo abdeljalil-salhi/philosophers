@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:15:58 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/18 18:42:05 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/20 13:32:41 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_error(t_philo *g, char *str)
 	return (1);
 }
 
-void	ft_exit_error(t_philo *g, char *str, int usage)
+int	ft_exit_error(t_philo *g, char *str, int usage)
 {
 	write(2, RED, ft_strlen(RED));
 	write(2, "Error:\t", 7);
@@ -33,5 +33,5 @@ void	ft_exit_error(t_philo *g, char *str, int usage)
 		printf("\t        [number_of_times_each_philosopher_must_eat]\n" RESET);
 	}
 	ft_free_struct(g);
-	exit(1);
+	return (1);
 }

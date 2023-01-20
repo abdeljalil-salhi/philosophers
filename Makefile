@@ -6,7 +6,7 @@
 #    By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 03:02:44 by absalhi           #+#    #+#              #
-#    Updated: 2023/01/18 20:59:57 by absalhi          ###   ########.fr        #
+#    Updated: 2023/01/20 15:52:58 by absalhi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,11 @@ $(NAME)	:	$(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 			@echo $(GREEN)"- Compiled -"$(NONE)
 
+test	:	testing/example.o
+			@echo $(ITALIC)$(GRAY) "     - Compiling test..." $(NONE)
+			@$(CC) $(CFLAGS) testing/example.o -o test
+			@echo $(GREEN)"- Compiled test -"$(NONE)
+
 bonus	:	$(BOBJS)
 			@echo $(ITALIC)$(GRAY) "     - Compiling $(BNAME)..." $(NONE)
 			@$(CC) $(CFLAGS) $(BOBJS) -o $(NAME)
@@ -49,11 +54,11 @@ bonus	:	$(BOBJS)
 
 clean	:
 			@echo $(ITALIC)$(GRAY) "     - Removing object files..." $(NONE)
-			@$(RM) $(OBJS) $(BOBJS)
+			@$(RM) $(OBJS) $(BOBJS) testing/example.o
 
 fclean	:	clean
 			@echo $(ITALIC)$(GRAY) "     - Removing $(NAME)..." $(NONE)
-			@$(RM) $(NAME) $(BNAME)
+			@$(RM) $(NAME) $(BNAME) test
 
 re		:	fclean all
 
