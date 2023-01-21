@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:21:42 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/21 14:00:38 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/21 14:14:57 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_is_valid_timestamps(t_philo *g, char **argv)
 		if (!ft_isint(argv[i]))
 			return (ft_error(g, "One of the arguments isn't a valid number."));
 	g->n_philos = ft_atoi(argv[1]);
+	if (!g->n_philos)
+		return (ft_error(g, "You need at least one philosopher to start."));
 	g->routine.time_to_die = ft_atoi(argv[2]);
 	g->routine.time_to_eat = ft_atoi(argv[3]);
 	g->routine.time_to_sleep = ft_atoi(argv[4]);
