@@ -6,12 +6,15 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:19 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/20 15:29:07 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/21 07:27:35 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	A function to check if a string contains a valid number of type `int`.
+*/
 int	ft_isint(char *str)
 {
 	long int	n;
@@ -37,11 +40,36 @@ int	ft_isint(char *str)
 	return ((n * s) <= INT_MAX && (n * s) >= INT_MIN);
 }
 
-unsigned long	ft_get_time(void *options)
+/*
+	The functions gettimeofday() and settimeofday() can get and set
+    the time as well as a timezone.
+
+    The `timestamp` argument is a `struct timeval` (as specified in
+    <sys/time.h>):
+
+		struct timeval
+		{
+			time_t		tv_sec;		// seconds
+			suseconds_t	tv_usec;	// microseconds
+		};
+	
+	and gives the number of seconds and microseconds since the Epoch
+		~ January 1st, 1970 at 00:00:00 UTC is referred to as the Unix epoch.
+
+	The `timezone` argument is a `struct timezone`:
+
+		struct timezone
+		{
+			int	tz_minuteswest;		// minutes west of Greenwich
+			int	tz_dsttime;			// type of DST correction
+		};
+*/
+unsigned long	ft_get_time(t_timezone *timezone)
 {
 	t_timeval	timestamp;
 
-	gettimeofday(&timestamp, options);
+	if (gettimeofday(&timestamp, timezone) == -1)
+		return (0);
 	return ((timestamp.tv_sec * 1000)
 		+ (timestamp.tv_usec / 1000));
 }

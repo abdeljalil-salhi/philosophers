@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:04:46 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/21 04:04:36 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/21 07:29:17 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # include <limits.h>
 # include <sys/time.h>
 
-# define UNINITIALIZED -1
-# define RED "\x1B[31m"
-# define GREEN "\x1B[32m"
-# define ITALIC "\x1B[3m"
-# define RESET "\x1B[0m"
+# define DEFAULT	-1
+# define RED		"\x1B[31m"
+# define GREEN		"\x1B[32m"
+# define ITALIC		"\x1B[3m"
+# define RESET		"\x1B[0m"
 
 typedef struct timeval	t_timeval;
+typedef struct timezone	t_timezone;
 
 typedef struct s_philos
 {
@@ -82,7 +83,7 @@ void			ft_free_struct(t_philo *g);
 int				ft_is_valid_timestamps(t_philo *g, char **argv);
 int				ft_check_and_init(t_philo *g, int argc, char **argv);
 int				ft_isint(char *str);
-unsigned long	ft_get_time(void *options);
+unsigned long	ft_get_time(t_timezone *timezone);
 int				ft_init_struct(t_philo *g);
 
 /* ---------------- FUNCTIONS ---------------- */

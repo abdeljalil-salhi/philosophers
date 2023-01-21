@@ -6,18 +6,28 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:15:58 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/21 04:48:26 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/21 07:45:17 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	 The ft_error() function sets the `g->exit_message` to the passed string
+		as argument `char *str` and returns 1.
+*/
 int	ft_error(t_philo *g, char *str)
 {
 	g->exit_message = str;
 	return (1);
 }
 
+/*
+	 The ft_exit_error() function prints the error passed as argument
+	 	`char *str` in the standard error, prints the usage if the
+		`int usage` parameter is flagged as true, frees the `t_philo`
+		struct and returns 1.
+*/
 int	ft_exit_error(t_philo *g, char *str, int usage)
 {
 	write(2, RED, ft_strlen(RED));

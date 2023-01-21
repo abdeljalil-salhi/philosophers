@@ -6,12 +6,15 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 04:37:33 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/20 15:48:01 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/21 07:55:09 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	A function to visualize our `t_philo` struct, it helps during debugging.
+*/
 void	ft_print_struct(t_philo *g)
 {
 	printf("struct s_philo:\n");
@@ -26,25 +29,71 @@ void	ft_print_struct(t_philo *g)
 	printf("\tchar            *exit_message: %s\n", g->exit_message);
 	printf("\tstruct s_alloc:\n");
 	printf("\t\tint philos: %d\n\n", g->allocated.philos);
-	system("leaks philo");
+	printf("\t\tint mutex_print: %d\n\n", g->allocated.mutex_print);
+	printf("\t\tint mutex_eating: %d\n\n", g->allocated.mutex_eating);
+	printf("\t\tint mutex_forks: %d\n\n", g->allocated.mutex_forks);
 }
 
+/*
+	Each time a pointer is allocated in the heap, it is flagged as 1 in
+	the g->allocated struct, it is freed here before exiting the program.
+*/
 void	ft_free_struct(t_philo *g)
 {
 	size_t	i;
+	int		mutex_forks;
 
+	mutex_forks = g->allocated.mutex_eating;
 	if (g->allocated.philos)
 		free(g->philos);
 	if (g->allocated.mutex_print)
 		free(g->print);
-	i = -1;
 	if (g->allocated.mutex_eating)
-		while (++i < g->n_philos)
+	{
+		i = -1;
+		while (++i < g->n_philos && g->allocated.mutex_eating--)
+		{
+			if (pthread_mutex_destroy(g->philos[i].eating))
+				ft_error(g, "Error destroying the eating mutex.");
 			free(g->philos[i].eating);
+		}
+	}
 	if (g->allocated.mutex_forks)
+	{
+		i = -1;
+		while (++i < g->n_philos && mutex_forks--)
+			if (pthread_mutex_destroy(&g->forks[i]))
+				ft_error(g, "Error destroying the forks mutex.");
 		free(g->forks);
+	}
 }
 
+/*
+	- The pthread_create() function starts a new thread in the calling
+      process. The new thread starts execution by invoking
+      ft_routine(); &g->philos[i] is passed as the sole argument of
+      ft_routine(). ~ equivalent to calling ft_routine(&g->philos[i])
+	  
+	- The pthread_detach() function marks the thread identified by
+	  thread as detached. When a detached thread terminates, its
+	  resources are automatically released back to the system without
+	  the need for another thread to join with the terminated thread.
+*/
+static int	ft_launch_thread(t_philo *g, int i)
+{
+	if (pthread_create(&g->philos[i].thread, NULL, &ft_routine, &g->philos[i]))
+		return (ft_error(g, "Error while creating the threads."));
+	if (pthread_detach(g->philos[i].thread))
+		return (ft_error(g, "Error while detaching the threads."));
+	if (usleep(100) == -1)
+		return (ft_error(g, "Error while system sleeping."));
+	return (0);
+}
+
+/*
+	 The main function of the program,
+		we check -> parse & init -> execute -> free -> exit;
+*/
 int	main(int argc, char **argv)
 {
 	t_philo	g;
@@ -53,11 +102,11 @@ int	main(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 		return (ft_exit_error(&g, "Invalid number of arguments.", 1));
 	if (ft_check_and_init(&g, argc, argv))
-		ft_exit_error(&g, g.exit_message, 0);
+		return (ft_exit_error(&g, g.exit_message, 0));
 	i = -1;
 	while (++i < g.n_philos)
-		if (pthread_join(g.philos[i].thread, 0))
-			return (ft_exit_error(&g, "Error while joining the threads.", 0));
-	ft_print_struct(&g);
+		if (ft_launch_thread(&g, i))
+			return(ft_exit_error(&g, g.exit_message, 0));
+	ft_free_struct(&g);
 	return (0);
 }

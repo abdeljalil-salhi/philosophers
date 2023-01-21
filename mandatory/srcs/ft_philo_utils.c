@@ -6,12 +6,18 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:21:42 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/20 14:03:12 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/21 07:46:28 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	 The ft_is_valid_timestamps() function to check if the arguments are
+		valid numbers of type `int`.
+	 If so; it parses them into my `routine` struct,
+		otherwise, it returns an error.
+*/
 int	ft_is_valid_timestamps(t_philo *g, char **argv)
 {
 	int	i;
@@ -27,10 +33,16 @@ int	ft_is_valid_timestamps(t_philo *g, char **argv)
 	if (g->limited_meals)
 		g->routine.n_of_times = ft_atoi(argv[5]);
 	else
-		g->routine.n_of_times = UNINITIALIZED;
+		g->routine.n_of_times = DEFAULT;
 	return (0);
 }
 
+/*
+	 The ft_check_and_init() function responsible of checking if
+		the arguments are valid, then parsing them into my `s_philo` struct.
+	 It returns 0 for success. On error, 1 is returned and `g->exit_message`
+		is set to indicate the error.
+*/
 int	ft_check_and_init(t_philo *g, int argc, char **argv)
 {
 	memset(g, 0, sizeof(t_philo));
