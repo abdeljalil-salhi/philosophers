@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:14:30 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/21 07:31:48 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/21 12:02:56 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ int	ft_init_struct(t_philo *g)
 	if (!g->print)
 		return (ft_error(g, "Error allocating the print mutex."));
 	g->allocated.mutex_print = 1;
+	if (pthread_mutex_init(g->print, NULL))
+		return (ft_error(g, "Error initializing the print mutex."));
+	g->wait = (pthread_mutex_t *) ft_calloc(1, sizeof(pthread_mutex_t));
+	if (!g->wait)
+		return (ft_error(g, "Error allocating the wait mutex."));
+	g->allocated.mutex_wait = 1;
+	if (pthread_mutex_init(g->wait, NULL))
+		return (ft_error(g, "Error initializing the wait mutex."));
 	g->forks = (pthread_mutex_t *)
 		ft_calloc(g->n_philos, sizeof(pthread_mutex_t));
 	if (!g->forks)
