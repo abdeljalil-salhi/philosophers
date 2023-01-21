@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:04:46 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/20 15:47:52 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/21 04:04:36 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_philos
 	t_timeval		last_meal;
 	int				dead;
 	pthread_mutex_t	*eating;
+	struct s_philo	*philo;
 }	t_philos;
 
 typedef struct s_routine
@@ -66,6 +67,7 @@ typedef struct s_philo
 	pthread_mutex_t	*print;
 	unsigned long	start;
 	int				limited_meals;
+	int				is_done;
 	char			*exit_message;
 	t_alloc			allocated;
 }	t_philo;

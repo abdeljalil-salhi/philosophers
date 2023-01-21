@@ -6,14 +6,14 @@
 #    By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 03:02:44 by absalhi           #+#    #+#              #
-#    Updated: 2023/01/20 15:52:58 by absalhi          ###   ########.fr        #
+#    Updated: 2023/01/21 04:03:51 by absalhi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 BNAME	=	philo_bonus
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread -O3
+CFLAGS	=	-Wall -Wextra -Werror -pthread -flto
 CC		=	cc
 RM		=	rm -rf
 
