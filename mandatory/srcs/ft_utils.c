@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:19 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/21 14:11:08 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/22 11:10:33 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,22 @@ unsigned long	ft_get_time(t_timezone *timezone)
 		return (0);
 	return ((timestamp.tv_sec * 1000)
 		+ (timestamp.tv_usec / 1000));
+}
+
+/*
+	 The function ft_format() prints the action to the standard output
+	 	with colors.
+*/
+void	ft_format(unsigned long timestamp, int id, char *log, int done)
+{
+	printf(GREEN "%10lums" RESET, timestamp);
+	printf(YELLOW "  |  " RESET);
+	if (done)
+		printf(GREEN "philosophers finished dinning\n" RESET);
+	else
+	{
+		printf("philosopher");
+		printf(BLUE " %d " RESET, id);
+		printf("%s\n", log);
+	}
 }
