@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:15:58 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/21 11:20:30 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:53:28 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 */
 int	ft_error(t_philo *g, char *str)
 {
+	if (pthread_mutex_lock(g->exit_mutex))
+		return (1);
 	g->exit_message = str;
+	if (pthread_mutex_unlock(g->exit_mutex))
+		return (1);
 	return (1);
 }
 
@@ -28,7 +32,11 @@ int	ft_error(t_philo *g, char *str)
 */
 void	*ft_perror(t_philo *g, char *str)
 {
+	if (pthread_mutex_lock(g->exit_mutex))
+		return (NULL);
 	g->exit_message = str;
+	if (pthread_mutex_unlock(g->exit_mutex))
+		return (NULL);
 	return (NULL);
 }
 

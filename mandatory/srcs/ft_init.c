@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:14:30 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/22 09:27:42 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:42:16 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ int	ft_init_mutexes(t_philo *g)
 	g->allocated.mutex_wait = 1;
 	if (pthread_mutex_init(g->wait, NULL))
 		return (ft_error(g, ERR_WAIT_MUTEX_INIT));
+	g->is_done_mutex = (pthread_mutex_t *)
+		ft_calloc(1, sizeof(pthread_mutex_t));
+	if (!g->is_done_mutex)
+		return (ft_error(g, ERR_DONE_MUTEX_MALLOC));
+	g->allocated.mutex_is_done = 1;
+	if (pthread_mutex_init(g->is_done_mutex, NULL))
+		return (ft_error(g, ERR_DONE_MUTEX_INIT));
+	g->exit_mutex = (pthread_mutex_t *) ft_calloc(1, sizeof(pthread_mutex_t));
+	if (!g->exit_mutex)
+		return (ft_error(g, ERR_EXIT_MUTEX_MALLOC));
+	g->allocated.mutex_exit = 1;
+	if (pthread_mutex_init(g->exit_mutex, NULL))
+		return (ft_error(g, ERR_EXIT_MUTEX_INIT));
 	g->forks = (pthread_mutex_t *)
 		ft_calloc(g->n_philos, sizeof(pthread_mutex_t));
 	if (!g->forks)
@@ -68,6 +81,13 @@ int	ft_init_philo(t_philo *g, int id)
 	g->allocated.mutex_eating++;
 	if (pthread_mutex_init(g->philos[id].eating, NULL))
 		return (ft_error(g, ERR_EATING_MUTEX_INIT));
+	g->philos[id].next_meal_mutex = (pthread_mutex_t *)
+		ft_calloc(1, sizeof(pthread_mutex_t));
+	if (!g->philos[id].next_meal_mutex)
+		return (ft_error(g, ERR_PHILO_MUTEX_MALLOC));
+	g->allocated.mutex_next_meal++;
+	if (pthread_mutex_init(g->philos[id].next_meal_mutex, NULL))
+		return (ft_error(g, ERR_PHILO_MUTEX_INIT));
 	if (pthread_mutex_init(&g->forks[id], NULL))
 		return (ft_error(g, ERR_FORK_MUTEX_INIT));
 	g->philos[id].philo = g;

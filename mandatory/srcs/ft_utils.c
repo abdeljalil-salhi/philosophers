@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:19 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 09:14:57 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:07:47 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	ft_usleep(t_philo *g, unsigned long _time)
 	_current = ft_get_time(NULL);
 	if (!_current)
 		return (ft_error(g, ERR_TIME) - 2);
-	while (!g->is_done)
+	while (!ft_safe_read_is_done(g))
 	{
 		_wait = ft_get_time(NULL);
 		if (!_wait)
@@ -92,6 +92,8 @@ int	ft_usleep(t_philo *g, unsigned long _time)
 		if (usleep(50) == -1)
 			return (ft_error(g, ERR_SLEEP) - 2);
 	}
+	if (ft_safe_read_exit_message(g))
+		return (1);
 	return (0);
 }
 

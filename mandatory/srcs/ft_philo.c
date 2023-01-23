@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:57:03 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 09:00:57 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:38:21 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	ft_repetitive_routine(t_philo *g, t_philos *philo)
 {
 	int	_case;
 
-	if (g->is_done)
-		return (1);
+	if (ft_safe_read_is_done(g))
+		return (1 + (ft_safe_read_exit_message(g) != NULL));
 	if (ft_take_forks(g, philo))
 		return (2);
 	if (ft_eat(g, philo))
@@ -84,7 +84,11 @@ int	ft_eat(t_philo *g, t_philos *philo)
 	philo->ate_at = ft_get_time(NULL);
 	if (!philo->ate_at)
 		return (ft_error(g, ERR_TIME));
+	if (pthread_mutex_lock(philo->next_meal_mutex))
+		return (ft_error(g, ERR_PHILO_MUTEX_LOCK));
 	philo->next_meal = philo->ate_at + (unsigned long) g->routine.time_to_die;
+	if (pthread_mutex_unlock(philo->next_meal_mutex))
+		return (ft_error(g, ERR_PHILO_MUTEX_UNLOCK));
 	if (ft_usleep(g, g->routine.time_to_eat) == -1)
 		return (1);
 	if (pthread_mutex_unlock(g->forks + philo->his_fork))

@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 04:37:33 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 03:07:26 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:06:59 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,19 @@ void	ft_free_struct(t_philo *g)
 		ft_destroy_mutex(g, g->print, ERR_PRINT_MUTEX_DESTROY);
 	if (g->allocated.mutex_wait)
 		ft_destroy_mutex(g, g->wait, ERR_WAIT_MUTEX_DESTROY);
+	if (g->allocated.mutex_is_done)
+		ft_destroy_mutex(g, g->is_done_mutex, ERR_DONE_MUTEX_DESTROY);
+	if (g->allocated.mutex_exit)
+		ft_destroy_mutex(g, g->exit_mutex, ERR_EXIT_MUTEX_DESTROY);
 	i = -1;
 	if (g->allocated.mutex_eating)
 		while (++i < g->n_philos && g->allocated.mutex_eating--)
 			ft_destroy_mutex(g, g->philos[i].eating, ERR_EATING_MUTEX_DESTROY);
+	i = -1;
+	if (g->allocated.mutex_next_meal)
+		while (++i < g->n_philos && g->allocated.mutex_next_meal--)
+			ft_destroy_mutex(g, g->philos[i].next_meal_mutex,
+				ERR_PHILO_MUTEX_DESTROY);
 	if (g->allocated.mutex_forks)
 	{
 		i = -1;

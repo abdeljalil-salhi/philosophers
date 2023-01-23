@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:04:46 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 02:57:03 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:39:07 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_philos
 	unsigned long	next_meal;
 	unsigned long	ate_at;
 	pthread_mutex_t	*eating;
+	pthread_mutex_t	*next_meal_mutex;
 	struct s_philo	*philo;
 }	t_philos;
 
@@ -68,10 +69,13 @@ typedef struct s_routine
 typedef struct s_alloc
 {
 	int	philos;
-	int	mutex_print;
 	int	mutex_eating;
+	int	mutex_next_meal;
 	int	mutex_forks;
+	int	mutex_print;
 	int	mutex_wait;
+	int	mutex_is_done;
+	int	mutex_exit;
 }	t_alloc;
 
 typedef struct s_philo
@@ -82,6 +86,8 @@ typedef struct s_philo
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*wait;
+	pthread_mutex_t	*is_done_mutex;
+	pthread_mutex_t	*exit_mutex;
 	unsigned long	start;
 	int				limited_meals;
 	int				is_done;
@@ -122,8 +128,11 @@ int				ft_check_and_init(t_philo *g, int argc, char **argv);
 int				ft_print_action(t_philo *g, t_philos *philo, int action);
 int				ft_isint(char *str);
 unsigned long	ft_get_time(t_timezone *timezone);
+int				ft_safe_read_is_done(t_philo *g);
 int				ft_usleep(t_philo *g, unsigned long _time);
 void			ft_format(unsigned long timestamp, int id, char *log, int done);
+int				ft_safe_read_is_done(t_philo *g);
+char			*ft_safe_read_exit_message(t_philo *g);
 
 /* ---------------- FUNCTIONS ---------------- */
 size_t			ft_strlen(const char *s);

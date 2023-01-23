@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:21:42 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/22 11:26:57 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:13:10 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,17 @@ void	*ft_routine_if_valid(void *philo)
 		s._time = ft_get_time(NULL);
 		if (!s._time)
 			return (ft_perror(s.casted->philo, ERR_TIME));
+		if (pthread_mutex_lock(s.casted->next_meal_mutex))
+			return (ft_perror(s.casted->philo, ERR_PHILO_MUTEX_LOCK));
 		if (s.casted->next_meal < s._time)
 		{
+			if (pthread_mutex_unlock(s.casted->next_meal_mutex))
+				return (ft_perror(s.casted->philo, ERR_PHILO_MUTEX_UNLOCK));
+			if (pthread_mutex_lock(s.casted->philo->is_done_mutex))
+				return (ft_perror(s.casted->philo, ERR_DONE_MUTEX_LOCK));
 			s.casted->philo->is_done = 1;
+			if (pthread_mutex_unlock(s.casted->philo->is_done_mutex))
+				return (ft_perror(s.casted->philo, ERR_DONE_MUTEX_UNLOCK));
 			if (pthread_mutex_lock(s.casted->eating))
 				return (ft_perror(s.casted->philo, ERR_EATING_MUTEX_LOCK));
 			if (ft_print_action(s.casted->philo, s.casted, DEAD))
@@ -116,6 +124,8 @@ void	*ft_routine_if_valid(void *philo)
 				return (ft_perror(s.casted->philo, ERR_WAIT_MUTEX_UNLOCK));
 			break ;
 		}
+		if (pthread_mutex_unlock(s.casted->next_meal_mutex))
+			return (ft_perror(s.casted->philo, ERR_PHILO_MUTEX_UNLOCK));
 	}
 	return (NULL);
 }
