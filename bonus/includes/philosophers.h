@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 13:50:49 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 14:44:44 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 23:42:05 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <limits.h>
 # include <sys/time.h>
+#include <semaphore.h>
 # include "errors.h"
 
 # define DEFAULT	-1
@@ -46,14 +47,13 @@ enum
 typedef struct s_philos
 {
 	int				id;
-	pthread_t		thread;
+	pid_t			process;
 	int				his_fork;
 	int				next_fork;
 	int				n_of_meals;
 	int				dead;
 	unsigned long	next_meal;
 	unsigned long	ate_at;
-	pthread_mutex_t	*eating;
 	struct s_philo	*philo;
 }	t_philos;
 
@@ -68,10 +68,9 @@ typedef struct s_routine
 typedef struct s_alloc
 {
 	int	philos;
-	int	mutex_print;
-	int	mutex_eating;
-	int	mutex_forks;
-	int	mutex_wait;
+	int	semaph_print;
+	int	semaph_forks;
+	int	semaph_wait;
 }	t_alloc;
 
 typedef struct s_philo
@@ -79,9 +78,9 @@ typedef struct s_philo
 	t_philos		*philos;
 	t_routine		routine;
 	size_t			n_philos;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	*wait;
+	sem_t			*forks;
+	sem_t			*print;
+	sem_t			*wait;
 	unsigned long	start;
 	int				limited_meals;
 	int				is_done;
@@ -95,6 +94,8 @@ int				ft_exit_error(t_philo *g, char *str, int usage);
 
 /* ---------------- UTILS ---------------- */
 void			ft_free_struct(t_philo *g);
+unsigned long	ft_get_time(t_timezone *timezone);
+void			ft_format(unsigned long timestamp, int id, char *log, int done);
 
 /* ---------------- FUNCTIONS ---------------- */
 size_t			ft_strlen(const char *s);

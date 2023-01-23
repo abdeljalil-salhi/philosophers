@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:08:55 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 14:51:44 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 23:52:32 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,19 @@
 */
 void	ft_free_struct(t_philo *g)
 {
-	(void) g;
+	size_t	i;
+
+	if (g->allocated.semaph_print)
+		if (sem_close(g->print) == -1)
+			ft_error(g, ERR_PRINT_SEMAPH_CLOSE);
+	if (g->allocated.semaph_wait)
+		if (sem_close(g->wait) == -1)
+			ft_error(g, ERR_WAIT_SEMAPH_CLOSE);
+	if (g->allocated.semaph_forks)
+		if (sem_close(g->forks) == -1)
+			ft_error(g, ERR_FORKS_SEMAPH_CLOSE);
+	if (g->allocated.philos)
+		free(g->philos);
 }
 
 /*
@@ -34,5 +46,7 @@ int	main(int argc, char **argv)
 		return (ft_exit_error(&g, ERR_ARGS_ARGC_INVALID, 1));
 	if (ft_check_and_init(&g, argc, argv))
 		return (ft_exit_error(&g, g.exit_message, 0));
+	if (sem_wait(g.wait) == -1)
+		return (ft_exit_error(&g, ERR_WAIT_SEMAPH_WAIT, 0));
 	return (0);
 }

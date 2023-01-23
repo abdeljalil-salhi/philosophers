@@ -6,13 +6,13 @@
 #    By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 03:02:44 by absalhi           #+#    #+#              #
-#    Updated: 2023/01/23 21:50:01 by absalhi          ###   ########.fr        #
+#    Updated: 2023/01/23 23:05:17 by absalhi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread -flto -fsanitize=thread
+CFLAGS	=	-Wall -Wextra -Werror -pthread -flto
 CC		=	cc
 RM		=	rm -rf
 
