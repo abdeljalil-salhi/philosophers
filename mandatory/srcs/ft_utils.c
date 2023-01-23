@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:19 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/22 11:10:33 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 09:14:57 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	ft_isint(char *str)
 
 /*
 	The functions gettimeofday() and settimeofday() can get and set
-    the time as well as a timezone.
+	the time as well as a timezone.
 
-    The `timestamp` argument is a `struct timeval` (as specified in
-    <sys/time.h>):
+	The `timestamp` argument is a `struct timeval` (as specified in
+	<sys/time.h>):
 
 		struct timeval
 		{
@@ -72,6 +72,27 @@ unsigned long	ft_get_time(t_timezone *timezone)
 		return (0);
 	return ((timestamp.tv_sec * 1000)
 		+ (timestamp.tv_usec / 1000));
+}
+
+int	ft_usleep(t_philo *g, unsigned long _time)
+{
+	unsigned long	_current;
+	unsigned long	_wait;
+
+	_current = ft_get_time(NULL);
+	if (!_current)
+		return (ft_error(g, ERR_TIME) - 2);
+	while (!g->is_done)
+	{
+		_wait = ft_get_time(NULL);
+		if (!_wait)
+			return (ft_error(g, ERR_TIME) - 2);
+		if ((_wait - _current) >= _time)
+			break ;
+		if (usleep(50) == -1)
+			return (ft_error(g, ERR_SLEEP) - 2);
+	}
+	return (0);
 }
 
 /*

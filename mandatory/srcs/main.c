@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 04:37:33 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/22 11:22:04 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 03:07:26 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	ft_free_struct(t_philo *g)
 	int		mutex_forks;
 
 	mutex_forks = g->allocated.mutex_eating;
-	if (g->allocated.philos)
-		free(g->philos);
 	if (g->allocated.mutex_print)
 		ft_destroy_mutex(g, g->print, ERR_PRINT_MUTEX_DESTROY);
 	if (g->allocated.mutex_wait)
@@ -71,6 +69,8 @@ void	ft_free_struct(t_philo *g)
 				ft_error(g, ERR_FORK_MUTEX_DESTROY);
 		free(g->forks);
 	}
+	if (g->allocated.philos)
+		free(g->philos);
 }
 
 /*

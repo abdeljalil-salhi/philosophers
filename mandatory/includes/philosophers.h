@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:04:46 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/22 11:02:47 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 02:57:03 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int				ft_check_and_init(t_philo *g, int argc, char **argv);
 int				ft_print_action(t_philo *g, t_philos *philo, int action);
 int				ft_isint(char *str);
 unsigned long	ft_get_time(t_timezone *timezone);
+int				ft_usleep(t_philo *g, unsigned long _time);
 void			ft_format(unsigned long timestamp, int id, char *log, int done);
 
 /* ---------------- FUNCTIONS ---------------- */

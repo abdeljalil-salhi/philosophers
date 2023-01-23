@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:57:03 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/22 09:21:09 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 09:00:57 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	ft_eat(t_philo *g, t_philos *philo)
 	if (!philo->ate_at)
 		return (ft_error(g, ERR_TIME));
 	philo->next_meal = philo->ate_at + (unsigned long) g->routine.time_to_die;
-	if (usleep(g->routine.time_to_eat * 1000) == -1)
-		return (ft_error(g, ERR_SLEEP));
+	if (ft_usleep(g, g->routine.time_to_eat) == -1)
+		return (1);
 	if (pthread_mutex_unlock(g->forks + philo->his_fork))
 		return (ft_error(g, ERR_FORK_MUTEX_UNLOCK));
 	if (pthread_mutex_unlock(g->forks + philo->next_fork))
@@ -102,7 +102,7 @@ int	ft_sleep(t_philo *g, t_philos *philo)
 		return (ft_error(g, ERR_SLEEP));
 	if (ft_print_action(g, philo, SLEEPING))
 		return (1);
-	if (usleep(g->routine.time_to_sleep * 1000) == -1)
-		return (ft_error(g, ERR_SLEEP));
+	if (ft_usleep(g, g->routine.time_to_sleep) == -1)
+		return (1);
 	return (0);
 }

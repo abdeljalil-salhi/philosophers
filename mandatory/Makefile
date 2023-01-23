@@ -6,7 +6,7 @@
 #    By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 03:02:44 by absalhi           #+#    #+#              #
-#    Updated: 2023/01/22 11:01:28 by absalhi          ###   ########.fr        #
+#    Updated: 2023/01/23 09:16:09 by absalhi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,27 +27,18 @@ _SDIR	=	srcs
 _SRCS	=	main.c ft_errors.c ft_init.c ft_philo_utils.c ft_utils.c \
 			ft_functions.c ft_philo.c
 SRCS	=	$(addprefix $(_SDIR)/, $(_SRCS))
-# _ODIR	=	bin
 OBJS	=	$(SRCS:.c=.o)
-# OBJS	=	$(addprefix $(_ODIR)/, $(_OBJS))
 
 .c.o	:
 			@echo $(ITALIC)$(GRAY) "     - Making $<..." $(NONE)
 			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-
-# $(_ODIR)/%.o	:	%.c
-# 			$(MKDIR) $(dir $@)
-# 			@echo $(ITALIC)$(GRAY) "     - Making $<..." $(NONE)
-# 			@$(CC) $(CFLAGS) -c $< -o $@
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 			@echo $(ITALIC)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
 			@$(CC) $(CFLAGS) $(OBJS) -o $@
-			@echo $(GREEN)"- Compiled -"$(NONE)
-
-clean	:
+			@echo $(GREEN)"- Compiled -"$(NONE)clean	:
 			@echo $(ITALIC)$(GRAY) "     - Removing object files..." $(NONE)
 			@$(RM) $(OBJS)
 
