@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:04:46 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 16:39:07 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 21:47:53 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "errors.h"
 
 # define DEFAULT	-1
+# define NONULL		"no-null"
 # define RED		"\x1B[31m"
 # define GREEN		"\x1B[32m"
 # define YELLOW		"\x1B[33m"
@@ -111,10 +112,12 @@ int				ft_exit_error(t_philo *g, char *str, int usage);
 /* ---------------- INIT ---------------- */
 int				ft_init_struct(t_philo *g);
 int				ft_init_mutexes(t_philo *g);
+int				ft_init_mutex_locks(t_philo *g);
 int				ft_init_philo(t_philo *g, int id);
 
 /* ---------------- UTILS ---------------- */
 void			*ft_routine_if_valid(void *philo);
+void			*ft_routine_invalid(t_philo *g, t_philos *philo);
 int				ft_routine_if_done(t_philo *g, t_philos *philo);
 void			*ft_routine(void *philo);
 int				ft_repetitive_routine(t_philo *g, t_philos *philo);
@@ -122,6 +125,7 @@ int				ft_take_forks(t_philo *g, t_philos *philo);
 int				ft_eat(t_philo *g, t_philos *philo);
 int				ft_sleep(t_philo *g, t_philos *philo);
 void			ft_destroy_mutex(t_philo *g, pthread_mutex_t *mutex, char *err);
+void			ft_free_mutexes(t_philo *g);
 void			ft_free_struct(t_philo *g);
 int				ft_is_valid_timestamps(t_philo *g, char **argv);
 int				ft_check_and_init(t_philo *g, int argc, char **argv);

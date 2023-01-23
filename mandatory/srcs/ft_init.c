@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:14:30 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 17:42:16 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 21:31:41 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ int	ft_init_mutexes(t_philo *g)
 	g->allocated.mutex_wait = 1;
 	if (pthread_mutex_init(g->wait, NULL))
 		return (ft_error(g, ERR_WAIT_MUTEX_INIT));
+	if (ft_init_mutex_locks(g))
+		return (1);
+	g->forks = (pthread_mutex_t *)
+		ft_calloc(g->n_philos, sizeof(pthread_mutex_t));
+	if (!g->forks)
+		return (ft_error(g, ERR_FORK_MUTEX_MALLOC));
+	g->allocated.mutex_forks = 1;
+	return (0);
+}
+
+int	ft_init_mutex_locks(t_philo *g)
+{
 	g->is_done_mutex = (pthread_mutex_t *)
 		ft_calloc(1, sizeof(pthread_mutex_t));
 	if (!g->is_done_mutex)
@@ -59,11 +71,6 @@ int	ft_init_mutexes(t_philo *g)
 	g->allocated.mutex_exit = 1;
 	if (pthread_mutex_init(g->exit_mutex, NULL))
 		return (ft_error(g, ERR_EXIT_MUTEX_INIT));
-	g->forks = (pthread_mutex_t *)
-		ft_calloc(g->n_philos, sizeof(pthread_mutex_t));
-	if (!g->forks)
-		return (ft_error(g, ERR_FORK_MUTEX_MALLOC));
-	g->allocated.mutex_forks = 1;
 	return (0);
 }
 

@@ -6,13 +6,13 @@
 #    By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 03:02:44 by absalhi           #+#    #+#              #
-#    Updated: 2023/01/23 17:08:30 by absalhi          ###   ########.fr        #
+#    Updated: 2023/01/23 21:50:01 by absalhi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread -flto
+CFLAGS	=	-Wall -Wextra -Werror -pthread -flto -fsanitize=thread
 CC		=	cc
 RM		=	rm -rf
 
@@ -23,8 +23,8 @@ GRAY	=	'\033[2;37m'
 ITALIC	=	'\033[3m'
 
 _SDIR	=	srcs
-_SRCS	=	main.c ft_errors.c ft_init.c ft_philo_utils.c ft_utils.c \
-			ft_functions.c ft_philo.c ft_read_only.c
+_SRCS	=	main.c ft_errors.c ft_init.c ft_philo_utils.c ft_philo_utils_2.c \
+			ft_utils.c ft_functions.c ft_philo.c ft_read_only.c
 SRCS	=	$(addprefix $(_SDIR)/, $(_SRCS))
 OBJS	=	$(SRCS:.c=.o)
 

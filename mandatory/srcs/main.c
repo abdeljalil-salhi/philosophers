@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 04:37:33 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 17:06:59 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/23 21:48:22 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,7 @@ void	ft_free_struct(t_philo *g)
 	int		mutex_forks;
 
 	mutex_forks = g->allocated.mutex_eating;
-	if (g->allocated.mutex_print)
-		ft_destroy_mutex(g, g->print, ERR_PRINT_MUTEX_DESTROY);
-	if (g->allocated.mutex_wait)
-		ft_destroy_mutex(g, g->wait, ERR_WAIT_MUTEX_DESTROY);
-	if (g->allocated.mutex_is_done)
-		ft_destroy_mutex(g, g->is_done_mutex, ERR_DONE_MUTEX_DESTROY);
-	if (g->allocated.mutex_exit)
-		ft_destroy_mutex(g, g->exit_mutex, ERR_EXIT_MUTEX_DESTROY);
+	ft_free_mutexes(g);
 	i = -1;
 	if (g->allocated.mutex_eating)
 		while (++i < g->n_philos && g->allocated.mutex_eating--)
