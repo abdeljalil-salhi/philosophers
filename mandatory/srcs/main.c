@@ -6,35 +6,15 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 04:37:33 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 21:48:22 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 03:09:49 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
 /*
-	A function to visualize our `t_philo` struct, it helps during debugging.
+	This function destroys the mutex then frees its heap allocated area.
 */
-void	ft_print_struct(t_philo *g)
-{
-	printf("struct s_philo:\n");
-	printf("\tt_philos        *philos: %p\n", g->philos);
-	printf("\tstruct s_routine routine:\n");
-	printf("\t\tint time_to_die: %d\n", g->routine.time_to_die);
-	printf("\t\tint time_to_eat: %d\n", g->routine.time_to_eat);
-	printf("\t\tint time_to_sleep: %d\n", g->routine.time_to_sleep);
-	printf("\t\tint n_of_times: %d\n", g->routine.n_of_times);
-	printf("\tsize_t           n_philos: %zu\n", g->n_philos);
-	printf("\tint              limited_meals: %d\n", g->limited_meals);
-	printf("\tchar            *exit_message: %s\n", g->exit_message);
-	printf("\tstruct s_alloc:\n");
-	printf("\t\tint philos: %d\n\n", g->allocated.philos);
-	printf("\t\tint mutex_print: %d\n\n", g->allocated.mutex_print);
-	printf("\t\tint mutex_wait: %d\n\n", g->allocated.mutex_wait);
-	printf("\t\tint mutex_eating: %d\n\n", g->allocated.mutex_eating);
-	printf("\t\tint mutex_forks: %d\n\n", g->allocated.mutex_forks);
-}
-
 void	ft_destroy_mutex(t_philo *g, pthread_mutex_t *mutex, char *err)
 {
 	if (pthread_mutex_destroy(mutex))

@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:19 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 01:29:00 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 03:08:44 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ unsigned long	ft_get_time(t_timezone *timezone)
 		+ (timestamp.tv_usec / 1000));
 }
 
+/*
+	 The function ft_usleep() simulates the usleep() system function,
+	 	it handles the time-loss and data races.
+*/
 int	ft_usleep(t_philo *g, unsigned long _time)
 {
 	unsigned long	_current;

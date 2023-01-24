@@ -6,12 +6,15 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 16:25:20 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 16:39:33 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 03:07:46 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	 This is a safe-read function to get the `is_done` property.
+*/
 int	ft_safe_read_is_done(t_philo *g)
 {
 	int	_read;
@@ -24,6 +27,9 @@ int	ft_safe_read_is_done(t_philo *g)
 	return (_read);
 }
 
+/*
+	 This is a safe-read function to get the `exit_message` property.
+*/
 char	*ft_safe_read_exit_message(t_philo *g)
 {
 	char	*_read;

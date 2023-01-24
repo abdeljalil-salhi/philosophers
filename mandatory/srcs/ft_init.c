@@ -6,12 +6,15 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:14:30 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 21:31:41 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 02:57:52 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	 The ft_init_struct() function initializes the `t_philo *g` struct.
+*/
 int	ft_init_struct(t_philo *g)
 {
 	size_t	i;
@@ -32,6 +35,10 @@ int	ft_init_struct(t_philo *g)
 	return (0);
 }
 
+/*
+	 The ft_init_mutexes() function allocates the required area for
+	 	the mutexes and initializes them.
+*/
 int	ft_init_mutexes(t_philo *g)
 {
 	g->print = (pthread_mutex_t *) ft_calloc(1, sizeof(pthread_mutex_t));
@@ -56,6 +63,10 @@ int	ft_init_mutexes(t_philo *g)
 	return (0);
 }
 
+/*
+	 The ft_init_mutex_locks() function allocates the required area for
+	 	the mutex locks and initializes them. ~used to eliminate data races~
+*/
 int	ft_init_mutex_locks(t_philo *g)
 {
 	g->is_done_mutex = (pthread_mutex_t *)
@@ -74,6 +85,10 @@ int	ft_init_mutex_locks(t_philo *g)
 	return (0);
 }
 
+/*
+	 The ft_init_philo() function allocates the required mutexes and initializes
+	 	the properties of each philosopher.
+*/
 int	ft_init_philo(t_philo *g, int id)
 {
 	g->philos[id].id = id;

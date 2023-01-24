@@ -6,12 +6,16 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:57:03 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 16:38:21 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 03:06:32 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	 This is the routine function for each philosopher where he creates a thread
+	 	to check if any of the philosophers is dead, and goes in the routine..
+*/
 void	*ft_routine(void *philo)
 {
 	t_sroutine	s;
@@ -39,6 +43,11 @@ void	*ft_routine(void *philo)
 	return (NULL);
 }
 
+/*
+	 This is the detailed routine of each philosopher where;
+	 	he takes forks -> eats -> sleeps -> thinks
+		and so on...
+*/
 int	ft_repetitive_routine(t_philo *g, t_philos *philo)
 {
 	int	_case;
@@ -61,6 +70,10 @@ int	ft_repetitive_routine(t_philo *g, t_philos *philo)
 	return (0);
 }
 
+/*
+	 This is the function that locks the forks mutexes for each philosopher,
+	 	to avoid any data races.
+*/
 int	ft_take_forks(t_philo *g, t_philos *philo)
 {
 	if (pthread_mutex_lock(g->forks + philo->his_fork))
@@ -74,6 +87,11 @@ int	ft_take_forks(t_philo *g, t_philos *philo)
 	return (0);
 }
 
+/*
+	 This is the function where each philosopher eats, locking his eating
+	 	mutex, and increases the `n_of_meals` property, then unlocks
+		the forks mutexes.
+*/
 int	ft_eat(t_philo *g, t_philos *philo)
 {
 	if (pthread_mutex_lock(philo->eating))
@@ -100,6 +118,9 @@ int	ft_eat(t_philo *g, t_philos *philo)
 	return (0);
 }
 
+/*
+	 This is the function where each philosopher sleeps.
+*/
 int	ft_sleep(t_philo *g, t_philos *philo)
 {
 	if (usleep(10) == -1)

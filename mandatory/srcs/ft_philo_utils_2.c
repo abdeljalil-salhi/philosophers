@@ -6,12 +6,16 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 21:34:35 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 21:46:49 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 02:59:47 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	 The ft_routine_invalid() function checks if a philosopher is dead
+	 	and unlocks the main wait mutex.
+*/
 void	*ft_routine_invalid(t_philo *g, t_philos *philo)
 {
 	if (pthread_mutex_unlock(philo->next_meal_mutex))
@@ -30,6 +34,10 @@ void	*ft_routine_invalid(t_philo *g, t_philos *philo)
 	return (NONULL);
 }
 
+/*
+	 The ft_free_mutexes() function destroys the mutexes and frees their
+	 	allocated heap-memory afterwards.
+*/
 void	ft_free_mutexes(t_philo *g)
 {
 	if (g->allocated.mutex_print)
