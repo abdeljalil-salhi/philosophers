@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:36:59 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 23:52:02 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 02:05:45 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERR_SLEEP "Error while system sleeping."
 
 # define ERR_PHILO_MALLOC "Error allocating the philosophers."
+# define ERR_PHILO_PROCESS_FORK "Error while forking the philos processes."
 
 # define ERR_PRINT_SEMAPH_OPEN "Error while opening print semaphore."
 # define ERR_PRINT_SEMAPH_WAIT "Error while waiting print semaphore."
@@ -41,5 +42,17 @@
 # define ERR_FORKS_SEMAPH_POST "Error while posting forks semaphore."
 # define ERR_FORKS_SEMAPH_UNLINK "Error while unlinking forks semaphore."
 # define ERR_FORKS_SEMAPH_CLOSE "Error while closing forks semaphore."
+
+# define ERR_CHECK_SEMAPH_OPEN "Error while opening check semaphore."
+# define ERR_CHECK_SEMAPH_WAIT "Error while waiting check semaphore."
+# define ERR_CHECK_SEMAPH_POST "Error while posting check semaphore."
+# define ERR_CHECK_SEMAPH_UNLINK "Error while unlinking check semaphore."
+# define ERR_CHECK_SEMAPH_CLOSE "Error while closing check semaphore."
+
+# define ERR_MEALS_SEMAPH_OPEN "Error while opening meals semaphore."
+# define ERR_MEALS_SEMAPH_WAIT "Error while waiting meals semaphore."
+# define ERR_MEALS_SEMAPH_POST "Error while posting meals semaphore."
+# define ERR_MEALS_SEMAPH_UNLINK "Error while unlinking meals semaphore."
+# define ERR_MEALS_SEMAPH_CLOSE "Error while closing meals semaphore."
 
 #endif

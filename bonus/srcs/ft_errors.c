@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:40:00 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 14:42:58 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 00:55:32 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ int	ft_error(t_philo *g, char *str)
 {
 	g->exit_message = str;
 	return (1);
+}
+
+/*
+	 The ft_perror() function sets the `g->exit_message` to the passed string
+		as argument `char *str` and returns NULL (0x0).
+*/
+void	*ft_perror(t_philo *g, char *str)
+{
+	g->exit_message = str;
+	return (NULL);
 }
 
 /*

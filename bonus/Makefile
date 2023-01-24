@@ -6,7 +6,7 @@
 #    By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 12:07:12 by absalhi           #+#    #+#              #
-#    Updated: 2023/01/23 14:57:04 by absalhi          ###   ########.fr        #
+#    Updated: 2023/01/24 01:26:07 by absalhi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ITALIC	=	'\033[3m'
 
 _SDIR	=	srcs
 _SRCS	=	main.c ft_errors.c ft_init.c ft_philo_utils.c ft_utils.c \
-			ft_functions.c
+			ft_functions.c ft_philo.c
 SRCS	=	$(addprefix $(_SDIR)/, $(_SRCS))
 OBJS	=	$(SRCS:.c=.o)
 

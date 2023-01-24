@@ -6,11 +6,18 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:51:59 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 14:53:15 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 02:45:13 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
+
+typedef struct s_rvalid
+{
+	t_philos		*casted;
+	unsigned long	_time;
+	int				_case;
+}	t_rvalid;
 
 /*
 	 The ft_is_valid_timestamps() function to check if the arguments are
@@ -74,6 +81,8 @@ int	ft_print_action(t_philo *g, t_philos *philo, int action)
 	if (!_time)
 		return (ft_error(g, ERR_TIME));
 	_time -= g->start;
+	if (sem_wait(g->print))
+		return (ft_error(g, ERR_PRINT_SEMAPH_WAIT));
 	if (action == DEAD)
 		ft_format(_time, philo->id + 1, "died", 0);
 	else if (action == TOOK_FORK)
@@ -86,5 +95,59 @@ int	ft_print_action(t_philo *g, t_philos *philo, int action)
 		ft_format(_time, philo->id + 1, "is thinking", 0);
 	else if (action == IS_DONE)
 		ft_format(_time, 0, NULL, 1);
+	if (action < DEAD)
+		if (sem_post(g->print))
+			return (ft_error(g, ERR_PRINT_SEMAPH_POST));
+	return (0);
+}
+
+void	*ft_routine_if_valid(void *philo)
+{
+	t_rvalid	s;
+
+	s.casted = (t_philos *) philo;
+	while (1)
+	{
+		s._case = ft_routine_check(s.casted->philo, s.casted, &s._time);
+		if (s._case == 2)
+			break ;
+		else if (s._case)
+			return (NULL);
+		if (ft_routine_if_done(s.casted->philo, s.casted) == 2)
+		{
+			if (ft_print_action(s.casted->philo, philo, IS_DONE))
+				return (NULL);
+			if (sem_post(s.casted->philo->wait))
+				return (ft_perror(s.casted->philo, ERR_WAIT_SEMAPH_POST));
+			break ;
+		}
+		if (sem_post(s.casted->philo->check))
+			return (ft_perror(s.casted->philo, ERR_CHECK_SEMAPH_POST));
+	}
+	return (NULL);
+}
+
+int	ft_routine_if_done(t_philo *g, t_philos *philo)
+{
+	int		all;
+	int		j;
+
+	(void) philo;
+	if (g->limited_meals)
+	{
+		all = 1;
+		j = 0;
+		while (sem_trywait(g->meals) != -1)
+			j++;
+		if ((size_t) j < g->routine.n_of_times * g->n_philos)
+			all = 0;
+		if (all)
+		{
+			g->is_done = 1;
+			return (2);
+		}
+		while (j--)
+			sem_post(g->meals);
+	}
 	return (0);
 }
