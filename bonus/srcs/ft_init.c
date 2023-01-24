@@ -6,12 +6,15 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:55:06 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 02:36:36 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 03:12:44 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	 The ft_init_struct() function initializes the `t_philo *g` struct.
+*/
 int	ft_init_struct(t_philo *g)
 {
 	size_t	i;
@@ -32,6 +35,10 @@ int	ft_init_struct(t_philo *g)
 	return (0);
 }
 
+/*
+	 This function unlinks the semaphores in case of a past Key-Interrupt
+	 	or kill signal.
+*/
 static void	ft_unlink_semaphores(void)
 {
 	sem_unlink("/print");
@@ -41,6 +48,10 @@ static void	ft_unlink_semaphores(void)
 	sem_unlink("/meals");
 }
 
+/*
+	 This function opens the required sempahores in the shared memory area
+	 	and flags them in the `allocated` struct.
+*/
 int	ft_init_semaphores(t_philo *g)
 {
 	ft_unlink_semaphores();
@@ -67,6 +78,10 @@ int	ft_init_semaphores(t_philo *g)
 	return (0);
 }
 
+/*
+	This function initializes the properties of each philo, setting up
+		their indexes.
+*/
 int	ft_init_philo(t_philo *g, int id)
 {
 	g->philos[id].id = id;

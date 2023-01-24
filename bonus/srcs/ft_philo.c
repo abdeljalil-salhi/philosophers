@@ -6,12 +6,16 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:34:27 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 02:47:01 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 03:17:12 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/*
+	 This is the routine function for each philosopher where he creates a thread
+	 	to check if any of the philosophers is dead, and goes in the routine..
+*/
 void	ft_routine(t_philo *g, t_philos *philo)
 {
 	unsigned long	_time;
@@ -41,6 +45,10 @@ void	ft_routine(t_philo *g, t_philos *philo)
 	exit(0);
 }
 
+/*
+	 This is the function that locks the waits the semaphore for
+	 	each philosopher to take two forks during its turn.
+*/
 int	ft_take_forks(t_philo *g, t_philos *philo)
 {
 	if (sem_wait(philo->philo->forks))
@@ -54,6 +62,10 @@ int	ft_take_forks(t_philo *g, t_philos *philo)
 	return (0);
 }
 
+/*
+	 This is the function where each philosopher eats, increasing the
+	 	value of the `meals` semaphore, then put down the forks.
+*/
 int	ft_eat(t_philo *g, t_philos *philo)
 {
 	if (ft_print_action(g, philo, EATING))
@@ -73,6 +85,9 @@ int	ft_eat(t_philo *g, t_philos *philo)
 	return (0);
 }
 
+/*
+	 This is the function where each philosopher sleeps.
+*/
 int	ft_sleep(t_philo *g, t_philos *philo)
 {
 	if (usleep(10) == -1)
@@ -84,6 +99,10 @@ int	ft_sleep(t_philo *g, t_philos *philo)
 	return (0);
 }
 
+/*
+	 This function checks if a philosopher is dead
+	 	and waits the `check` semaphore in the main thread.
+*/
 int	ft_routine_check(t_philo *g, t_philos *philo, unsigned long *_time)
 {
 	if (sem_wait(g->check))

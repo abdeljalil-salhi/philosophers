@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:08:55 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 02:32:17 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 03:19:01 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ void	ft_free_struct(t_philo *g)
 		free(g->philos);
 }
 
+/*
+	 The fork() creates a new process by duplicating the calling process.
+    	The new process is referred to as the child process. The calling
+    	process is referred to as the parent process.
+	 The child process and the parent process run in separate memory
+		spaces.  At the time of fork() both memory spaces have the same
+		content.  Memory writes, file mappings, and unmappings performed
+		by one of the processes do not affect the other.
+*/
 static int	ft_launch_process(t_philo *g, int i)
 {
 	g->philos[i].process = fork();

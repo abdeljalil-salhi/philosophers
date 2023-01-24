@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:51:59 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 02:45:13 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/24 03:13:16 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,10 @@ int	ft_print_action(t_philo *g, t_philos *philo, int action)
 	return (0);
 }
 
+/*
+	 The ft_routine_if_valid() function is an infinite loop where a thread
+	 	checks if a philo died. If so, it raises the flag for IS_DONE.
+*/
 void	*ft_routine_if_valid(void *philo)
 {
 	t_rvalid	s;
@@ -127,6 +131,11 @@ void	*ft_routine_if_valid(void *philo)
 	return (NULL);
 }
 
+/*
+	 The ft_routine_if_done() function checks if every philosopher ate
+	 	at least `n_of_times`. If so, it raises the IS_DONE flag and stops
+		the simulation.
+*/
 int	ft_routine_if_done(t_philo *g, t_philos *philo)
 {
 	int		all;
