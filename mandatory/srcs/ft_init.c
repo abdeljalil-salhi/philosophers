@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:14:30 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 02:57:52 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/25 05:27:17 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	ft_init_mutex_locks(t_philo *g)
 */
 int	ft_init_philo(t_philo *g, int id)
 {
+	memset(&g->philos[id], 0, sizeof(t_philos));
 	g->philos[id].id = id;
 	g->philos[id].his_fork = id;
 	g->philos[id].next_fork = (id + 1) % g->n_philos;

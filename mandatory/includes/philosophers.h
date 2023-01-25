@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:04:46 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 21:47:53 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/25 06:35:23 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int				ft_init_philo(t_philo *g, int id);
 
 /* ---------------- UTILS ---------------- */
 void			*ft_routine_if_valid(void *philo);
-void			*ft_routine_invalid(t_philo *g, t_philos *philo);
+int				ft_routine_invalid(t_philo *g, t_philos *philo);
 int				ft_routine_if_done(t_philo *g, t_philos *philo);
 void			*ft_routine(void *philo);
 int				ft_repetitive_routine(t_philo *g, t_philos *philo);

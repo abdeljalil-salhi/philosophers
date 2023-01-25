@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 03:15:58 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 16:53:28 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/25 06:37:33 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@
 */
 int	ft_error(t_philo *g, char *str)
 {
-	if (pthread_mutex_lock(g->exit_mutex))
-		return (1);
-	g->exit_message = str;
-	if (pthread_mutex_unlock(g->exit_mutex))
-		return (1);
+	if (g->allocated.mutex_exit)
+	{
+		if (pthread_mutex_lock(g->exit_mutex))
+			return (1);
+		g->exit_message = str;
+		if (pthread_mutex_unlock(g->exit_mutex))
+			return (1);
+	}
+	else
+		g->exit_message = str;
 	return (1);
 }
 
@@ -32,11 +37,16 @@ int	ft_error(t_philo *g, char *str)
 */
 void	*ft_perror(t_philo *g, char *str)
 {
-	if (pthread_mutex_lock(g->exit_mutex))
-		return (NULL);
-	g->exit_message = str;
-	if (pthread_mutex_unlock(g->exit_mutex))
-		return (NULL);
+	if (g->allocated.mutex_exit)
+	{
+		if (pthread_mutex_lock(g->exit_mutex))
+			return (NULL);
+		g->exit_message = str;
+		if (pthread_mutex_unlock(g->exit_mutex))
+			return (NULL);
+	}
+	else
+		g->exit_message = str;
 	return (NULL);
 }
 

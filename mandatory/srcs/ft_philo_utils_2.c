@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 21:34:35 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 02:59:47 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/25 06:37:46 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 	 The ft_routine_invalid() function checks if a philosopher is dead
 	 	and unlocks the main wait mutex.
 */
-void	*ft_routine_invalid(t_philo *g, t_philos *philo)
+int	ft_routine_invalid(t_philo *g, t_philos *philo)
 {
 	if (pthread_mutex_unlock(philo->next_meal_mutex))
-		return (ft_perror(g, ERR_PHILO_MUTEX_UNLOCK));
+		return (ft_error(g, ERR_PHILO_MUTEX_UNLOCK));
 	if (pthread_mutex_lock(g->is_done_mutex))
-		return (ft_perror(g, ERR_DONE_MUTEX_LOCK));
+		return (ft_error(g, ERR_DONE_MUTEX_LOCK));
 	g->is_done = 1;
 	if (pthread_mutex_unlock(g->is_done_mutex))
-		return (ft_perror(g, ERR_DONE_MUTEX_UNLOCK));
+		return (ft_error(g, ERR_DONE_MUTEX_UNLOCK));
 	if (pthread_mutex_lock(philo->eating))
-		return (ft_perror(g, ERR_EATING_MUTEX_LOCK));
+		return (ft_error(g, ERR_EATING_MUTEX_LOCK));
 	if (ft_print_action(g, philo, DEAD))
-		return (NULL);
+		return (1);
 	if (pthread_mutex_unlock(g->wait))
-		return (ft_perror(g, ERR_WAIT_MUTEX_UNLOCK));
-	return (NONULL);
+		return (ft_error(g, ERR_WAIT_MUTEX_UNLOCK));
+	return (0);
 }
 
 /*

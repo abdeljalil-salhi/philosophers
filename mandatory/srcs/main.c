@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 04:37:33 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 03:09:49 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/25 06:32:29 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,21 +85,25 @@ static int	ft_launch_thread(t_philo *g, int i)
 */
 int	main(int argc, char **argv)
 {
-	t_philo	g;
+	t_philo	*g;
 	size_t	i;
 
+	g = (t_philo *) ft_calloc(1, sizeof(t_philo));
+	if (!g)
+		return (ft_exit_error(g, ERR_STRUCT_MALLOC, 0));
 	if (argc != 5 && argc != 6)
-		return (ft_exit_error(&g, ERR_ARGS_ARGC_INVALID, 1));
-	if (ft_check_and_init(&g, argc, argv))
-		return (ft_exit_error(&g, g.exit_message, 0));
-	if (pthread_mutex_lock(g.wait))
-		return (ft_exit_error(&g, ERR_WAIT_MUTEX_LOCK, 0));
+		return (ft_exit_error(g, ERR_ARGS_ARGC_INVALID, 1));
+	if (ft_check_and_init(g, argc, argv))
+		return (ft_exit_error(g, g->exit_message, 0));
+	if (pthread_mutex_lock(g->wait))
+		return (ft_exit_error(g, ERR_WAIT_MUTEX_LOCK, 0));
 	i = -1;
-	while (++i < g.n_philos)
-		if (ft_launch_thread(&g, i))
-			return (ft_exit_error(&g, g.exit_message, 0));
-	if (pthread_mutex_lock(g.wait))
-		return (ft_exit_error(&g, ERR_WAIT_MUTEX_LOCK, 0));
-	ft_free_struct(&g);
+	while (++i < g->n_philos)
+		if (ft_launch_thread(g, i))
+			return (ft_exit_error(g, g->exit_message, 0));
+	if (pthread_mutex_lock(g->wait)){
+		return (ft_exit_error(g, ERR_WAIT_MUTEX_LOCK, 0));}
+	ft_free_struct(g);
+	free(g);
 	return (0);
 }

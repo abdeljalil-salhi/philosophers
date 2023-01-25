@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 09:14:51 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/23 16:29:34 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/25 06:32:02 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 # define ERR_TIME "Error while getting the time of the system."
 # define ERR_SLEEP "Error while system sleeping."
+
+# define ERR_STRUCT_MALLOC "Error allocating the global struct."
 
 # define ERR_PHILO_MALLOC "Error allocating the philosophers."
 # define ERR_PHILO_THREAD_CREAT "Error while creating the philos threads."
