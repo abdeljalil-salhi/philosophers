@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 04:37:33 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/25 06:32:29 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/25 07:23:53 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	main(int argc, char **argv)
 	while (++i < g->n_philos)
 		if (ft_launch_thread(g, i))
 			return (ft_exit_error(g, g->exit_message, 0));
-	if (pthread_mutex_lock(g->wait)){
-		return (ft_exit_error(g, ERR_WAIT_MUTEX_LOCK, 0));}
+	if (pthread_mutex_lock(g->wait))
+		return (ft_exit_error(g, ERR_WAIT_MUTEX_LOCK, 0));
 	ft_free_struct(g);
 	free(g);
 	return (0);
