@@ -31,11 +31,11 @@ The Philosopher's Dining Problem is a classic problem in computer science that i
 
 In the C programming language, this problem can be implemented using threads and synchronization mechanisms such as semaphores or mutexes. Here's an example of how to implement the Philosopher's Dining Problem using semaphores:
 
-1. Declare an array of semaphores, one for each chopstick.
-2. Create a function for each philosopher thread that will run concurrently. Inside the function, the philosopher will first wait on the semaphore for the chopstick to their left, then wait on the semaphore for the chopstick to their right. Once both chopsticks are acquired, the philosopher can eat for a random amount of time.
-3. Initialize each semaphore with a value of 1 to represent that the chopstick is available.
-4. Create the philosopher threads and start them.
-5. Wait for all threads to complete.
+1. Declare an array of mutexes, one for each chopstick.
+2. Create a function for each philosopher thread that will run concurrently. Inside the function, the philosopher will first lock the mutex for the chopstick to their left, then lock the mutex for the chopstick to their right. Once both chopsticks are acquired, the philosopher can eat for a random amount of time.
+3. Initialize each mutex using the `pthread_mutex_init()` function.
+4. Create the philosopher threads and start them using the `pthread_create()` function.
+5. Wait for all threads to complete using the `pthread_join()` function.
 6. Release resources and exit the program.
 
 Here is a sample code snippet for implementing the philosopher's dining problem using threads and mutexes (minimal example):
