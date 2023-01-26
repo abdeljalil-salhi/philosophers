@@ -6,7 +6,7 @@
 /*   By: absalhi <absalhi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:19 by absalhi           #+#    #+#             */
-/*   Updated: 2023/01/24 03:08:44 by absalhi          ###   ########.fr       */
+/*   Updated: 2023/01/26 12:14:01 by absalhi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	ft_format(unsigned long timestamp, int id, char *log, int done)
 	printf(GREEN "%10lums" RESET, timestamp);
 	printf(YELLOW "  |  " RESET);
 	if (done)
-		printf(GREEN "philosophers finished dinning\n" RESET);
+		printf(GREEN "philosophers finished dining\n" RESET);
 	else
 	{
 		printf("philosopher");
