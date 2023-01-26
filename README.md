@@ -142,3 +142,5 @@ To check if your project is working correctly, you can test the following cases 
 - Test with **4 410 200 200**, no one should die!
 - Test with **4 310 200 100**, a philosopher should die!
 - Test with 2 philosophers and check the different times (a death delayed by more than 10ms is unacceptable).
+
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fabdeljalil-salhi%2Fphilosophers&count_bg=%233DACC8&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=REPO+VIEWS&edge_flat=true)](https://hits.seeyoufarm.com)
