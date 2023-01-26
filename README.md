@@ -22,10 +22,10 @@
   * [Usage](#usage)
   * [Description](#description)
   * [Implementation](#implementation)
-    + [What is a deadlock ?](#what-is-a-deadlock)
-    + [What is a data race ?](#what-is-a-data-race)
-    + [How to check for data races ?](#how-to-check-for-data-races)
-  * [Is my project working correctly ?](#is-my-project-working-correctly)
+    + [What is a deadlock ?](#what-is-a-deadlock-)
+    + [What is a data race ?](#what-is-a-data-race-)
+    + [How to check for data races ?](#how-to-check-for-data-races-)
+  * [Is my project working correctly ?](#is-my-project-working-correctly-)
 
 ## Usage
 
