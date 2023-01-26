@@ -27,7 +27,7 @@ $> ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_
 
 Eat, Sleep, Spaghetti, repeat. This project is about learning how threads work by precisely timing a group of philosophers on when to pick up forks and eat spaghetti without dying from hunger.
 
-The Philosopher's Dining Problem is a classic problem in computer science that illustrates the concept of deadlock and synchronization. The problem describes a scenario where a group of philosophers are seated around a round table and are each trying to eat their dinner. However, in order to eat, they must first pick up the chopsticks that are located between them and their neighbors.
+The [**Philosopher's Dining Problem**](https://en.wikipedia.org/wiki/Dining_philosophers_problem), originally formulated in 1965 by [Edsger Wybe Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra), is a classic problem in computer science that illustrates the concept of deadlock and synchronization. The problem describes a scenario where a group of philosophers are seated around a round table and are each trying to eat their dinner. However, in order to eat, they must first pick up the chopsticks that are located between them and their neighbors.
 
 In the C programming language, this problem can be implemented using threads and synchronization mechanisms such as semaphores or mutexes. Here's an example of how to implement the Philosopher's Dining Problem using semaphores:
 
