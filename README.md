@@ -54,7 +54,9 @@ In the C programming language, this problem can be implemented using threads and
 Here is a sample code snippet for implementing the philosopher's dining problem using threads and mutexes _(minimal example)_:
 
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/65598953/214824421-8bcb0a94-2668-453c-b816-1c28b0fc0c4f.png" width="500" />
+	<a href="/testing/threads_mutexes.c">
+		<img src="https://user-images.githubusercontent.com/65598953/214824421-8bcb0a94-2668-453c-b816-1c28b0fc0c4f.png" width="500" />
+	</a>
 </p>
 
 We used mutexes to implement the dining philosophers problem. Mutexes are a synchronization mechanism that allows us to lock and unlock resources. In the above example, we use a mutex to lock a chopstick before a philosopher can pick it up. If the chopstick is already locked, the philosopher will wait until the chopstick is unlocked before picking it up. Once the philosopher is done eating, they will unlock the chopstick so that another philosopher can pick it up.
