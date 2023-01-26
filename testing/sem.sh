@@ -1,3 +1,3 @@
-gcc -Wall -Wextra -Werror -pthread -flto semaphore.c
-# gcc -Wall -Wextra -Werror -pthread -flto example.c
-echo "compiled"
+gcc -Wall -Wextra -Werror -pthread -flto playaround_semaphore.c -o semaphore
+gcc -Wall -Wextra -Werror -pthread -flto playaround_thread.c -o thread
+echo "compiled playarounds"
