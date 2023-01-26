@@ -13,7 +13,10 @@
 ---
 
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/65598953/214820503-5997179d-152a-4aa1-91d3-7fd1f9569f93.png" width="500"/><br />
+	<a href="https://www.onverticality.com/blog/raphael-school-of-athens" alt="School of Athens">
+		<img src="https://user-images.githubusercontent.com/65598953/214820503-5997179d-152a-4aa1-91d3-7fd1f9569f93.png" width="500"/>
+	</a>
+	<br />
 	<i><b>School of Athens</b> by Raphael</i>
 </p>
 
