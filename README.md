@@ -1,4 +1,6 @@
-# Philosophers - 42 project
+<h1 align="center">
+	📖 Philosophers - 42 Project
+</h1>
 
 <p align="center">
     <a href="https://projects.intra.42.fr/projects/42cursus-philosophers/projects_users/2935014" alt="absalhi's philosophers">
@@ -8,6 +10,14 @@
     <a href="https://projects.intra.42.fr/projects/42cursus-philosophers/projects_users/2935014">
         <img src="https://badge42.vercel.app/api/v2/cl9iseqxd00640gl9mg4g0mxp/project/2935014" alt="absalhi's 42 philosophers Score" />
     </a>
+</p>
+
+<p align="center">
+	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/abdeljalil-salhi/philosophers?color=lightblue" />
+	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/abdeljalil-salhi/philosophers?color=critical" />
+	<img alt="Code language count" src="https://img.shields.io/github/languages/count/abdeljalil-salhi/philosophers?color=yellow" />
+	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/abdeljalil-salhi/philosophers?color=blue" />
+	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/abdeljalil-salhi/philosophers?color=green" />
 </p>
 
 ---
@@ -143,4 +153,4 @@ To check if your project is working correctly, you can test the following cases 
 - Test with **4 310 200 100**, a philosopher should die!
 - Test with 2 philosophers and check the different times (a death delayed by more than 10ms is unacceptable).
 
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fabdeljalil-salhi%2Fphilosophers&count_bg=%233DACC8&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=REPO+VIEWS&edge_flat=true)](https://hits.seeyoufarm.com)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fabdeljalil-salhi%2Fphilosophers&count_bg=%233DACC8&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=REPO+VIEWS&edge_flat=true)](https://github.com/abdeljalil-salhi)
